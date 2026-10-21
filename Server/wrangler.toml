@@ -1,0 +1,22 @@
+# Handover AI proxy: a Cloudflare Worker that keeps the Gemini API key off the phone.
+name = "handover-api"
+main = "src/index.js"
+compatibility_date = "2025-09-01"
+
+[vars]
+# Primary model, then fallbacks tried in order if Google retires or rate-limits one.
+GEMINI_MODEL = "gemini-3.8-flash"
+GEMINI_FALLBACK_MODELS = "gemini-3.6-flash,gemini-2.5-flash"
+# Max AI requests per device per day (needs the QUOTA KV namespace below).
+DAILY_LIMIT = "150"
+
+# Optional but recommended: per-device daily limits.
+# 1. npx wrangler kv namespace create QUOTA
+# 2. paste the id it prints below and uncomment.
+# [[kv_namespaces]]
+# binding = "QUOTA"
+# id = "paste-namespace-id-here"
+
+# Secrets (never commit these):
+#   npx wrangler secret put GEMINI_API_KEY
+#   npx wrangler secret put APP_KEY

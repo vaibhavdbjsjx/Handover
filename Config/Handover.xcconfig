@@ -1,0 +1,15 @@
+// Handover build configuration.
+// Edit these values once, then build. Everything else reads from here.
+
+// Your bundle identifier, as registered in App Store Connect.
+PRODUCT_BUNDLE_IDENTIFIER = com.yourname.handover
+
+// Your Apple Developer Team ID (Xcode > Signing & Capabilities fills this in too).
+DEVELOPMENT_TEAM =
+
+// Base URL of the Handover AI proxy (the Cloudflare Worker in /Server).
+// Keep the "/$()/" trick: xcconfig files treat "//" as a comment.
+HANDOVER_API_BASE_URL = https:/$()/handover-api.YOUR-SUBDOMAIN.workers.dev
+
+// Must match the APP_KEY secret you set on the Worker.
+HANDOVER_APP_KEY = replace-with-a-long-random-string
