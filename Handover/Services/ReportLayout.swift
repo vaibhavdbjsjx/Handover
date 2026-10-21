@@ -361,7 +361,12 @@ struct ReportLayout {
     // MARK: Claim
 
     private func claimSection() {
-        let chargeable = snapshot.rooms.flatMap { room in room.items.filter { $0.change.isChargeable }.map { (room.name, $0) } }
+        var chargeable: [(String, ReportSnapshot.Item)] = []
+        for room in snapshot.rooms {
+            for item in room.items where item.change.isChargeable {
+                chargeable.append((room.name, item))
+            }
+        }
         writer.newPage()
         heading("\(region.depositTerm.capitalized) claim summary", subtitle: "Items assessed as cleaning, damage or missing, with the evidence for each.")
 
